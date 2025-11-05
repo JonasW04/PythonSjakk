@@ -1,13 +1,13 @@
 import math
 import Sjakkbrikke
 
-VANLIGESTARTPOSISJONER = "rnbqkbnrpppppppp................................PPPPPPPPRNBQKBNR"
+VANLIGE_STARTPOSISJONER = "rnbqkbnrpppppppp................................PPPPPPPPRNBQKBNR"
 
 class Sjakkbrett():
     brettMatrise = []
     brikker = []
     
-    def __init__(self, posisjoner = VANLIGESTARTPOSISJONER):
+    def __init__(self, posisjoner = VANLIGE_STARTPOSISJONER):
             #posisjoner må være en string med lengde som er kvadrattall ettersom sjakkbrett er kvadrater
             self.brettstørrelse = int(math.sqrt(len(posisjoner)))
             self.brettMatrise = [["." for _ in range(self.brettstørrelse)] for _ in range(self.brettstørrelse)] #Lager tomt brett
@@ -20,49 +20,49 @@ class Sjakkbrett():
 
                 if char.lower() == "p":
                     if char.isupper():
-                        brikke = Sjakkbrikke.Bonde(Sjakkbrikke.Farge.HVIT, posisjon)
+                        brikke = Sjakkbrikke.Bonde(Sjakkbrikke.Farge.HVIT, posisjon, self)
                     else:
-                        brikke = Sjakkbrikke.Bonde(Sjakkbrikke.Farge.SVART, posisjon)
+                        brikke = Sjakkbrikke.Bonde(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
                     self.brettMatrise[x][y] = brikke
 
                 elif char.lower() == "k":
                     if char.isupper():
-                        brikke = Sjakkbrikke.Konge(Sjakkbrikke.Farge.HVIT, posisjon)
+                        brikke = Sjakkbrikke.Konge(Sjakkbrikke.Farge.HVIT, posisjon, self)
                     else:
-                        brikke = Sjakkbrikke.Konge(Sjakkbrikke.Farge.SVART, posisjon)
+                        brikke = Sjakkbrikke.Konge(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
                     self.brettMatrise[x][y] = brikke
 
                 elif char.lower() == "q":
                     if char.isupper():
-                        brikke = Sjakkbrikke.Dronning(Sjakkbrikke.Farge.HVIT, posisjon)
+                        brikke = Sjakkbrikke.Dronning(Sjakkbrikke.Farge.HVIT, posisjon, self)
                     else:
-                        brikke = Sjakkbrikke.Dronning(Sjakkbrikke.Farge.SVART, posisjon)
+                        brikke = Sjakkbrikke.Dronning(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
                     self.brettMatrise[x][y] = brikke
 
                 elif char.lower() == "r":
                     if char.isupper():
-                        brikke = Sjakkbrikke.Tårn(Sjakkbrikke.Farge.HVIT, posisjon)
+                        brikke = Sjakkbrikke.Tårn(Sjakkbrikke.Farge.HVIT, posisjon, self)
                     else:
-                        brikke = Sjakkbrikke.Tårn(Sjakkbrikke.Farge.SVART, posisjon)
+                        brikke = Sjakkbrikke.Tårn(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
                     self.brettMatrise[x][y] = brikke
 
                 elif char.lower() == "n":
                     if char.isupper():
-                        brikke = Sjakkbrikke.Springer(Sjakkbrikke.Farge.HVIT, posisjon)
+                        brikke = Sjakkbrikke.Springer(Sjakkbrikke.Farge.HVIT, posisjon, self)
                     else:
-                        brikke = Sjakkbrikke.Springer(Sjakkbrikke.Farge.SVART, posisjon)
+                        brikke = Sjakkbrikke.Springer(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
                     self.brettMatrise[x][y] = brikke
 
                 elif char.lower() == "b":
                     if char.isupper():
-                        brikke = Sjakkbrikke.Løper(Sjakkbrikke.Farge.HVIT, posisjon)
+                        brikke = Sjakkbrikke.Løper(Sjakkbrikke.Farge.HVIT, posisjon, self)
                     else:
-                        brikke = Sjakkbrikke.Løper(Sjakkbrikke.Farge.SVART, posisjon)
+                        brikke = Sjakkbrikke.Løper(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
                     self.brettMatrise[x][y] = brikke
 
@@ -74,3 +74,5 @@ class Sjakkbrett():
                 else:
                     print(".", end = "")
             print("")
+
+
