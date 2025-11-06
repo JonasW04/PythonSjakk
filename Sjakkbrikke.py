@@ -20,24 +20,27 @@ class Sjakkbrikke():
         self.posisjon = posisjon
         self.symbol = symbol
         self.brett = brett
-        self.x_pos = posisjon[0]
-        self.y_pos = posisjon[1]
+        self.x_pos = posisjon[1]
+        self.y_pos = posisjon[0]
+        self.i_start_posisjon = True
+        self.bevegelsesretning = -1 if self.farge == Farge.HVIT else 1
 
     def flytt(self, trekk):
-        trekk_x = trekk[0]
-        trekk_y = trekk[1]
-        obj = self.brett.brettMatrise[trekk_x][trekk_y]
+        trekk_x = trekk[1]
+        trekk_y = trekk[0]
+        obj = self.brett.brettMatrise[trekk_y][trekk_x]
         if issubclass(obj.__class__, Sjakkbrikke): #Sletter brikke om den blir slått ut
             obj.slettBrikke()
-        self.brett.brettMatrise[self.x_pos][self.y_pos] = "."
-        self.brett.brettMatrise[trekk_x][trekk_y] = self
+        self.brett.brettMatrise[self.y_pos][self.x_pos] = "."
+        self.brett.brettMatrise[trekk_y][trekk_x] = self
         self.posisjon = trekk
+        self.i_start_posisjon = False
 
     def slettBrikke(self):
         self.brett.brikker.remove(self)
         del self
 
-    def sjekkMuligeTrekk(brett):
+    def trekkErLovlig(brett, trekk):
         pass
 
 
@@ -49,7 +52,17 @@ class Bonde(Sjakkbrikke):
             symbol = "♙"
         super().__init__(farge, Brikke.BONDE, posisjon, symbol, brett)
 
-
+    def trekkErLovlig(self, trekk):
+        if trekk == (self.y_pos + self.bevegelsesretning, self.x_pos) and self.brett.brettMatrise[trekk[0]][trekk[1]] == ".":
+            return True
+        elif  self.i_start_posisjon and trekk == (self.y_pos + 2*self.bevegelsesretning, self.x_pos) and self.brett.brettMatrise[trekk[0]][trekk[1]] == "." and self.brett.brettMatrise[trekk[0] - self.bevegelsesretning][trekk[1]] == ".":
+            return True
+        elif trekk == (self.y_pos + self.bevegelsesretning, self.x_pos + 1) and self.brett.brettMatrise[trekk[0]][trekk[1]] != "." and self.brett.brettMatrise[trekk[0]][trekk[1]].farge != self.farge:
+            return True
+        elif trekk == (self.y_pos + self.bevegelsesretning, self.x_pos - 1) and self.brett.brettMatrise[trekk[0]][trekk[1]] != "." and self.brett.brettMatrise[trekk[0]][trekk[1]].farge != self.farge:
+            return True
+        return False
+            
 class Løper(Sjakkbrikke):
     def __init__(self, farge, posisjon, brett):
         if farge == Farge.HVIT:

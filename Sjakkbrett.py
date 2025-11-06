@@ -15,8 +15,8 @@ class Sjakkbrett():
             #Lager brikker og legger dem til i lista brikker som tilhører instansen
             for i, char in enumerate(posisjoner):
                 posisjon = (i//self.brettstørrelse, i % self.brettstørrelse)
-                x = posisjon[0]
-                y = posisjon[1]
+                x = posisjon[1]
+                y = posisjon[0]
 
                 if char.lower() == "p":
                     if char.isupper():
@@ -24,7 +24,7 @@ class Sjakkbrett():
                     else:
                         brikke = Sjakkbrikke.Bonde(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
-                    self.brettMatrise[x][y] = brikke
+                    self.brettMatrise[y][x] = brikke
 
                 elif char.lower() == "k":
                     if char.isupper():
@@ -32,7 +32,7 @@ class Sjakkbrett():
                     else:
                         brikke = Sjakkbrikke.Konge(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
-                    self.brettMatrise[x][y] = brikke
+                    self.brettMatrise[y][x] = brikke
 
                 elif char.lower() == "q":
                     if char.isupper():
@@ -40,7 +40,7 @@ class Sjakkbrett():
                     else:
                         brikke = Sjakkbrikke.Dronning(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
-                    self.brettMatrise[x][y] = brikke
+                    self.brettMatrise[y][x] = brikke
 
                 elif char.lower() == "r":
                     if char.isupper():
@@ -48,7 +48,7 @@ class Sjakkbrett():
                     else:
                         brikke = Sjakkbrikke.Tårn(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
-                    self.brettMatrise[x][y] = brikke
+                    self.brettMatrise[y][x] = brikke
 
                 elif char.lower() == "n":
                     if char.isupper():
@@ -56,7 +56,7 @@ class Sjakkbrett():
                     else:
                         brikke = Sjakkbrikke.Springer(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
-                    self.brettMatrise[x][y] = brikke
+                    self.brettMatrise[y][x] = brikke
 
                 elif char.lower() == "b":
                     if char.isupper():
@@ -64,7 +64,7 @@ class Sjakkbrett():
                     else:
                         brikke = Sjakkbrikke.Løper(Sjakkbrikke.Farge.SVART, posisjon, self)
                     self.brikker.append(brikke)
-                    self.brettMatrise[x][y] = brikke
+                    self.brettMatrise[y][x] = brikke
 
     def printBrett(self):
         for rad in self.brettMatrise:

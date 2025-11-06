@@ -9,9 +9,8 @@ def sjekkSjakkMatt():
 
 def main():
     brett = Sjakk.Sjakkbrett()
+    brett.brettMatrise[1][1].flytt((2,1))
     brett.printBrett()
-    brett.brikker[8].flytt((6,0))
-    print("---------------")
-    brett.printBrett()
+    print(brett.brettMatrise[1][0].trekkErLovlig((2,1)))
     
 main()
